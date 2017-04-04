@@ -7,6 +7,15 @@ const config = require('./config.json')
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use((req,res,next)=>{
+    if(req.query.admin_key == config.bgw_admin_key){
+      next()
+    } else {
+      res.status(403).json({status:false, error:'Invalid border gateway admin key' })
+    }
+})
+
 app.use(require('./routes'))
 
 

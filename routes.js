@@ -1,7 +1,9 @@
 const routes = require('express')()
 
-routes.post('/validate',(req,res)=>{
-  res.status(200).json({allowed:true})
+
+
+routes.get('/validate',(req,res)=>{
+  res.status(200).json({status:true})
 })
 
 module.exports = routes
