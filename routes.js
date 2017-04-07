@@ -31,7 +31,7 @@ const sendReply = async (res,action)=>{
     const result = await action()
     result? res.status(200).json(result) : res.status(200)
   } catch (e){
-    res.status(403).json({error:e})
+    res.status(e.code|| 500).json({error:e})
   }
 }
 

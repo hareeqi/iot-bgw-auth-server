@@ -14,7 +14,7 @@ class User {
     user.updated = Date.now()
     db.put(key,user);
   }
-  async get (key){
+  async get (user_key){
     return await db.get(user_key)
   }
   async getAll(){

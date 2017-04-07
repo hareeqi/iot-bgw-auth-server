@@ -7,19 +7,20 @@ const level = require('level')
 const db = level(config.db_file_path);
 
 module.exports.get = (key)=> new Promise((resolve, reject) =>{
-  db.get(key,(error,value)=> error ? reject('DB_ERROR') : resolve(value))
+  db.get(key,(error,value)=> error ? reject({code:404,message:error.message}) : resolve(JSON.parse(value)))
 })
 module.exports.del = (key)=> new Promise((resolve, reject) =>{
   db.del(key,(error)=> error ? reject('DB_ERROR') : resolve())
 })
 module.exports.put = (key,value)=> new Promise((resolve, reject) =>{
-  db.put(key,vlaue,(error)=> error ? reject('DB_ERROR') : resolve())
+  db.put(key,JSON.stringify(value),(error)=> (error ? reject('DB_ERROR') : resolve()))
 })
 
 module.exports.getAll =  ()=>new Promise((resolve, reject) =>{
   let users = []
-  db.createReadStream()
-  .on('data', function ({key,name,created,updated}=x) {
+  db.createValueStream()
+  .on('data', function (value) {
+    const {key,name,created,updated} = JSON.parse(value)
     users.push({key,name,created,updated})
   })
   .on('error', function (err) {
