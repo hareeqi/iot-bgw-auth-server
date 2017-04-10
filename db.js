@@ -6,6 +6,7 @@ const level = require('level')
 
 const db = level(config.db_file_path);
 
+
 module.exports.get = (key)=> new Promise((resolve, reject) =>{
   db.get(key,(error,value)=> error ? reject({code:404,message:error.message}) : resolve(JSON.parse(value)))
 })
@@ -20,8 +21,8 @@ module.exports.getAll =  ()=>new Promise((resolve, reject) =>{
   let users = []
   db.createValueStream()
   .on('data', function (value) {
-    const {key,name,created,updated} = JSON.parse(value)
-    users.push({key,name,created,updated})
+    const {user_id,name,created,updated} = JSON.parse(value)
+    users.push({user_id,name,created,updated})
   })
   .on('error', function (err) {
     console.log("DB_ERROR",err);
@@ -32,3 +33,8 @@ module.exports.getAll =  ()=>new Promise((resolve, reject) =>{
   })
 })
 module.exports.key = ()=>uuid().replace(/-/g,'')
+
+setTimeout(()=>{
+  require('./model').create({user_id:'admin',rules:['#']})
+
+},1000)

@@ -6,9 +6,9 @@ class User {
   create (user){
     user.created = Date.now()
     user.updated = user.created
-    user.key = db.key()
-    db.put(user.key,user);
-    return {key:user.key}
+    user.user_id = user.user_id || db.key()
+    db.put(user.user_id,user);
+    return {key:user.user_id}
   }
   update(key,user) {
     user.updated = Date.now()
