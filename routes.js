@@ -15,7 +15,7 @@ routes.get('/user/',(req,res)=>
 
 
 routes.post('/user/:key/validate',(req,res)=>
-  sendReply(res,()=>model.validate(req.params.key)))
+  sendReply(res,()=>model.validate(req.params.key,req.body)))
 
 routes.post('/user/:key/renew_key',(req,res)=>
   sendReply(res,()=>model.renew_key(req.params.key)))
