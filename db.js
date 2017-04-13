@@ -1,23 +1,24 @@
+const fs = require('fs');
 const config = require('./config')
-const uuid = require('uuid/v4');
-
 const level = require('level')
+const auth = require('../iot-bgw-auth-client')
 
 
 const db = level(config.db_file_path);
 
-
-module.exports.get = (key)=> new Promise((resolve, reject) =>{
+const get = (key)=> new Promise((resolve, reject) =>{
   db.get(key,(error,value)=> error ? reject({code:404,message:error.message}) : resolve(JSON.parse(value)))
 })
-module.exports.del = (key)=> new Promise((resolve, reject) =>{
+const del = (key)=> new Promise((resolve, reject) =>{
   db.del(key,(error)=> error ? reject('DB_ERROR') : resolve())
 })
-module.exports.put = (key,value)=> new Promise((resolve, reject) =>{
+const put = (key,value)=> new Promise((resolve, reject) =>{
   db.put(key,JSON.stringify(value),(error)=> (error ? reject('DB_ERROR') : resolve()))
 })
 
-module.exports.getAll =  ()=>new Promise((resolve, reject) =>{
+
+
+const getAll =  ()=>new Promise((resolve, reject) =>{
   let users = []
   db.createValueStream()
   .on('data', function (value) {
@@ -25,16 +26,28 @@ module.exports.getAll =  ()=>new Promise((resolve, reject) =>{
     users.push({user_id,name,created,updated})
   })
   .on('error', function (err) {
-    console.log("DB_ERROR",err);
     reject('DB_ERROR');
   })
   .on('close', function () {
+    console.log('all ',users);
     resolve(users)
   })
 })
-module.exports.key = ()=>uuid().replace(/-/g,'')
+const key = auth.genId
+const sign = auth.sign
 
-setTimeout(()=>{
-  require('./model').create({user_id:'admin',rules:['#']})
+module.exports = {
+  get,getAll,del,put,key,sign,
+}
 
+
+setTimeout(async()=>{
+  console.log('=============================================================================')
+  console.log('=============================================================================')
+  console.log('=================================  Admin Key  ===============================')
+  console.log('')
+  console.log('        ',(await require('./model').create({user_id:'admin',rules:['#']})).key)
+  console.log('')
+  console.log('=============================================================================')
+  console.log('=============================================================================')
 },1000)

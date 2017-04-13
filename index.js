@@ -3,13 +3,15 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const config = require('./config.json')
 
+require('../iot-bgw-auth-client').init(config)
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use((req,res,next)=>{
-    if(req.query.admin_key == config.bgw_admin_key){
+
+    if(req.headers.authorization == config.bgw_admin_key_string){
       next()
     } else {
       res.status(403).json({status:false, error:'Invalid border gateway admin key' })
