@@ -1,36 +1,55 @@
 const db =  require('./db')
-
+const config = require('./config')
 
 class User {
 
   async create (user){
     user.created = Date.now()
     user.updated = user.created
+    user.issued = user.created
+    user.valid_from = user.valid_from || user.created
+    user.valid_to = user.valid_to || (user.created + 1000*config.valid_to.split('*').reduce((t,c)=>(t*c),1))
     user.user_id = user.user_id || db.key()
+    user.rules = user.rules || []
     const sign = await db.sign(user.user_id)
     user.password = sign.password_hash
     db.put(user.user_id,user);
     return {key:sign.key}
   }
-  update(key,user) {
-    user.updated = Date.now()
-    db.put(key,user);
+
+  async update(user_id,new_user) {
+    this.cleanUser(new_user)
+    const old_user = await db.get(user_id);
+    Object.assign(old_user,new_user)
+    old_user.updated = Date.now()
+    db.put(user_id,old_user);
   }
-  get (user_id){
-    return db.get(user_id)
+
+  async get (user_id){
+    let user =  await db.get(user_id)
+    user.cache_for =  config.cache_for.split('*').reduce((t,c)=>(t*c),1)
+    return user;
   }
+
   getAll(){
     return  db.getAll()
   }
   async renew_key(user_id){
     let user = await db.get(user_id)
     user.updated = Date.now()
+    user.issued = user.updated
     const sign = await db.sign(user_id)
     user.password = sign.password
     db.put(user.user_id,user);
     return {key:sign.key}
   }
 
+  cleanUser(user){
+    delete user.user_id
+    delete user.password
+    delete user.created
+    delete user.issued
+  }
 
 }
 module.exports = new User()

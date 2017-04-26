@@ -10,12 +10,11 @@ const get = (key)=> new Promise((resolve, reject) =>{
   db.get(key,(error,value)=> error ? reject({code:404,message:error.message}) : resolve(JSON.parse(value)))
 })
 const del = (key)=> new Promise((resolve, reject) =>{
-  db.del(key,(error)=> error ? reject('DB_ERROR') : resolve())
+  db.del(key,(error)=> error ? reject({code:404,message:error.message}) : resolve())
 })
 const put = (key,value)=> new Promise((resolve, reject) =>{
-  db.put(key,JSON.stringify(value),(error)=> (error ? reject('DB_ERROR') : resolve()))
+  db.put(key,JSON.stringify(value),(error)=> (error ? reject({code:404,message:error.message}) : resolve()))
 })
-
 
 
 const getAll =  ()=>new Promise((resolve, reject) =>{

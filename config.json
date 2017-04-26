@@ -3,5 +3,6 @@
   "bind_address": "127.0.0.1",
   "bind_port": 5055,
   "db_file_path":"./node_modules/bgw_db",
-  "cache_user_profile_for":"60*60"
+  "cache_for":"60*60",
+  "valid_to":"365*24*60*60"
 }
