@@ -29,7 +29,6 @@ const getAll =  ()=>new Promise((resolve, reject) =>{
     reject('DB_ERROR');
   })
   .on('close', function () {
-    console.log('all ',users);
     resolve(users)
   })
 })
