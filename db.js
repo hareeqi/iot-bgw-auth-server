@@ -21,8 +21,8 @@ const getAll =  ()=>new Promise((resolve, reject) =>{
   let users = []
   db.createValueStream()
   .on('data', function (value) {
-    const {user_id,name,created,updated} = JSON.parse(value)
-    users.push({user_id,name,created,updated})
+    const {user_id,name,created,updated, issued, valid_from, valid_to, rules_policy_deny_match } = JSON.parse(value)
+    users.push({user_id,name,created,updated, issued, valid_from, valid_to, rules_policy_deny_match })
   })
   .on('error', function (err) {
     reject('DB_ERROR');

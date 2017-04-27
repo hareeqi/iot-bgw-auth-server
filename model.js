@@ -3,18 +3,22 @@ const config = require('./config')
 
 class User {
 
-  async create (user){
+  async create (user={}){
+    user.user_id = user.user_id || db.key()
     user.created = Date.now()
     user.updated = user.created
     user.issued = user.created
     user.valid_from = user.valid_from || user.created
     user.valid_to = user.valid_to || (user.created + 1000*config.valid_to.split('*').reduce((t,c)=>(t*c),1))
-    user.user_id = user.user_id || db.key()
     user.rules = user.rules || []
     const sign = await db.sign(user.user_id)
     user.password = sign.password_hash
     db.put(user.user_id,user);
     return {key:sign.key}
+  }
+
+  remove (user_id){
+    db.del(user_id)
   }
 
   async update(user_id,new_user) {

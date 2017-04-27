@@ -1,8 +1,11 @@
 {
-  "bgw_admin_key": "../cert/3/key.pem",
   "bind_address": "127.0.0.1",
   "bind_port": 5055,
   "db_file_path":"./node_modules/bgw_db",
   "cache_for":"60*60",
-  "valid_to":"365*24*60*60"
+  "valid_to":"365*24*60*60",
+  "aaa_client":{
+    "log_level":5,
+    "secret":"../cert/3/key.pem"
+  }
 }
