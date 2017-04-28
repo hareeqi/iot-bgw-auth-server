@@ -1,5 +1,5 @@
 {
-  "name": "iot-bgw-auth",
+  "name": "iot-bgw-auth-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hareeqi/iot-bgw-auth.git"
+    "url": "git+https://github.com/hareeqi/iot-bgw-auth-server.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/hareeqi/iot-bgw-auth/issues"
+    "url": "https://github.com/hareeqi/iot-bgw-auth-server/issues"
   },
-  "homepage": "https://github.com/hareeqi/iot-bgw-auth#readme",
+  "homepage": "https://github.com/hareeqi/iot-bgw-auth-server#readme",
   "dependencies": {
     "body-parser": "^1.17.1",
     "cors": "^2.8.3",
