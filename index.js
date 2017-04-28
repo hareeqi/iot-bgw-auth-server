@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const config = require('./config.json')
 
-require('../iot-bgw-auth-client').init(config)
+require('../iot-bgw-aaa-client').init(config)
 
 app.use(cors());
 app.use(bodyParser.json());

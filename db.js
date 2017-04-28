@@ -1,7 +1,7 @@
 const fs = require('fs');
 const config = require('./config')
 const level = require('level')
-const auth = require('../iot-bgw-auth-client')
+const auth = require('../iot-bgw-aaa-client')
 
 
 const db = level(config.db_file_path);
