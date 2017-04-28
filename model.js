@@ -4,7 +4,7 @@ const config = require('./config')
 class User {
 
   async create (user={}){
-    user.user_id = user.user_id || db.key()
+    user.user_id = user.user_id || db.genId()
     user.created = Date.now()
     user.updated = user.created
     user.issued = user.created

@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const config = require('./config.json')
 
-require('../iot-bgw-aaa-client').init(config)
+const {AAA, CAT} = require('../iot-bgw-aaa-client').init(config)
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -22,4 +22,4 @@ app.use(require('./routes'))
 
 
 app.listen(config.bind_port, config.bind_address,()=>
-console.log("iot-bgw-auth listening on %s:%d ",config.bind_address,  config.bind_port));
+AAA.log(CAT.PROCESS_START,`iot-bgw-auth listening on ${config.bind_address}:${config.bind_port}`));

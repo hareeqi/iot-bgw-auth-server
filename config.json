@@ -5,6 +5,7 @@
   "cache_for":"60*60",
   "valid_to":"365*24*60*60",
   "aaa_client":{
+    "name":"auth-server",
     "log_level":5,
     "secret":"../cert/3/key.pem"
   }

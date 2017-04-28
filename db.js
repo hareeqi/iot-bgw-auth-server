@@ -1,7 +1,7 @@
 const fs = require('fs');
 const config = require('./config')
 const level = require('level')
-const auth = require('../iot-bgw-aaa-client')
+const {genId,sign, AAA, CAT} = require('../iot-bgw-aaa-client')
 
 
 const db = level(config.db_file_path);
@@ -31,21 +31,18 @@ const getAll =  ()=>new Promise((resolve, reject) =>{
     resolve(users)
   })
 })
-const key = auth.genId
-const sign = auth.sign
+
 
 module.exports = {
-  get,getAll,del,put,key,sign,
+  get,getAll,del,put,genId,sign,
 }
 
 
 setTimeout(async()=>{
-  console.log('=============================================================================')
-  console.log('=============================================================================')
-  console.log('=================================  Admin Key  ===============================')
-  console.log('')
-  console.log('        ',(await require('./model').create({user_id:'admin',rules:['#']})).key)
-  console.log('')
-  console.log('=============================================================================')
-  console.log('=============================================================================')
+
+  AAA.log('=================================  Admin Key  ===============================')
+  AAA.log('                                                                             ')
+  AAA.log('        ',(await require('./model').create({user_id:'admin',rules:['#']})).key,'              ')
+  AAA.log('                                                                             ')
+  AAA.log('=============================================================================')
 },1000)
