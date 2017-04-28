@@ -7,6 +7,6 @@
   "aaa_client":{
     "name":"auth-server",
     "log_level":5,
-    "secret":"../cert/3/key.pem"
+    "secret":"./config/key.pem"
   }
 }
