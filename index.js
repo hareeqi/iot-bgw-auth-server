@@ -1,9 +1,8 @@
 const app = require('express')()
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const config = require('./config.json')
-
-const {AAA, CAT} = require('../iot-bgw-aaa-client').init(config)
+const config = require('./config')
+const {AAA, CAT} = require('../iot-bgw-aaa-client')
 
 app.use(cors());
 app.use(bodyParser.json());
