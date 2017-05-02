@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path')
 const config = require('./config')
 const level = require('level')
 const {genId,sign, AAA, CAT} = require('../iot-bgw-aaa-client')
@@ -32,17 +33,13 @@ const getAll =  ()=>new Promise((resolve, reject) =>{
   })
 })
 
-
 module.exports = {
   get,getAll,del,put,genId,sign,
 }
 
 
 setTimeout(async()=>{
-
-  AAA.log('=================================  Admin Key  ===============================')
-  AAA.log('                                                                             ')
-  AAA.log('        ',(await require('./model').create({user_id:'admin',rules:['#']})).key,'              ')
-  AAA.log('                                                                             ')
-  AAA.log('=============================================================================')
-},1000)
+  AAA.log(CAT.PROCESS_START,`Admin key is available in the following path ${config.api_admin_key_file_path}`)
+  const key = (await require('./model').create({user_id:'admin',rules:['#']})).key
+  fs.writeFileSync(path.join(config.api_admin_key_file_path,key),key)
+},500)

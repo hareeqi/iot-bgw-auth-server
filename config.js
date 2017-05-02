@@ -2,6 +2,7 @@ let config = {
   bind_address: "127.0.0.1",
   bind_port: 5055,
   db_file_path:"./config/bgw_db",
+  api_admin_key_file_path:"./config/",
   cache_for:"60*60",
   valid_to:"365*24*60*60",
   aaa_client:{
@@ -10,7 +11,7 @@ let config = {
     no_color:false,
     timestamp:false,
     disable_cat:[],
-    secret:"./config/key.pem"
+    secret: process.env.TLS_KEY || "./config/key.pem"
   }
 }
 
