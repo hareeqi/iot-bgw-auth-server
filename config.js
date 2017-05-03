@@ -3,7 +3,6 @@ let config = {
   bind_port: 5055,
   db_file_path:"./config/bgw_db",
   api_admin_key_file_path:"./config/",
-  cache_for:"60*60",
   valid_to:"365*24*60*60",
   aaa_client:{
     name:"auth-server",

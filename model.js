@@ -9,7 +9,7 @@ class User {
     user.updated = user.created
     user.issued = user.created
     user.valid_from = user.valid_from || user.created
-    user.valid_to = user.valid_to || (user.created + 1000*config.valid_to.split('*').reduce((t,c)=>(t*c),1))
+    user.valid_to = user.valid_to || (user.created + config.valid_to.split('*').reduce((t,c)=>(t*c),1000))
     user.rules = user.rules || []
     const sign = await db.sign(user.user_id)
     user.password = sign.password_hash
@@ -31,7 +31,6 @@ class User {
 
   async get (user_id){
     let user =  await db.get(user_id)
-    user.cache_for =  config.cache_for.split('*').reduce((t,c)=>(t*c),1)
     return user;
   }
 
