@@ -4,6 +4,10 @@ const config = require('./config')
 class User {
 
   async create (user={}){
+    const already_exist = user.user_id &&  await db.get(user.user_id)
+    if(already_exist && user.user_id != 'admin'){
+      throw {message:'user id already exist'}
+    }
     user.user_id = user.user_id || db.genId()
     user.created = Date.now()
     user.updated = user.created

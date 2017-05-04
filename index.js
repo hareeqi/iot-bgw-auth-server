@@ -21,4 +21,4 @@ app.use(require('./routes'))
 
 
 app.listen(config.bind_port, config.bind_address,()=>
-AAA.log(CAT.PROCESS_START,`iot-bgw-auth listening on ${config.bind_address}:${config.bind_port}`));
+AAA.log(CAT.PROCESS_START,`listening on ${config.bind_address}:${config.bind_port}`));
