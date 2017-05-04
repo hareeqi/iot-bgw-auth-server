@@ -41,5 +41,5 @@ module.exports = {
 setTimeout(async()=>{
   AAA.log(CAT.PROCESS_START,`Admin key is available in the following path ${config.api_admin_key_file_path}`)
   const key = (await require('./model').create({user_id:'admin',rules:['#']})).key
-  fs.writeFileSync(path.join(config.api_admin_key_file_path,key),key)
+  fs.writeFileSync(path.join(config.api_admin_key_file_path,'admin_api_key.txt'),key)
 },500)
