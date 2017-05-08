@@ -210,7 +210,9 @@
                     }
                 },
                 "401": {
-                    "$ref":"#/responses/Unauthorized"
+                      "description":"make sure you click on the Authorize button and enter the bgw api key as \"Bearer [bgw_api_key]\"",
+                      "schema":{
+                        "$ref":"#/responses/Unauthorized"}
                 },
                 "500": {
                     "$ref": "#/responses/RespInternalServerError"
@@ -233,7 +235,9 @@
                 ],
               "responses": {
                     "401": {
-                        "$ref":"#/responses/Unauthorized"
+                          "description":"make sure you click on the Authorize button and enter the bgw api key as \"Bearer [bgw_api_key]\"",
+                          "schema":{
+                            "$ref":"#/responses/Unauthorized"}
                     },
                     "200": {
                         "$ref":"#/responses/Key"
@@ -259,7 +263,9 @@
                 ],
                 "responses": {
                     "401": {
-                        "$ref":"#/responses/Unauthorized"
+                        "description":"make sure you click on the Authorize button and enter the bgw api key as \"Bearer [bgw_api_key]\"",
+                        "schema":{
+                        "$ref":"#/responses/Unauthorized"}
                     },
                     "200": {
                         "description": "Successful response",
@@ -295,7 +301,9 @@
                 ],
                 "responses": {
                     "401": {
-                        "$ref":"#/responses/Unauthorized"
+                        "description":"make sure you click on the Authorize button and enter the bgw api key as \"Bearer [bgw_api_key]\"",
+                        "schema":{
+                        "$ref":"#/responses/Unauthorized"}
                     },
                     "500": {
                         "$ref": "#/responses/RespInternalServerError"
@@ -316,7 +324,9 @@
                 ],
                 "responses": {
                     "401": {
-                        "$ref":"#/responses/Unauthorized"
+                        "description":"make sure you click on the Authorize button and enter the bgw api key as \"Bearer [bgw_api_key]\"",
+                        "schema":{
+                        "$ref":"#/responses/Unauthorized"}
                     },
                     "500": {
                         "$ref": "#/responses/RespInternalServerError"
@@ -339,7 +349,9 @@
                 ],
                 "responses": {
                     "401": {
-                        "$ref":"#/responses/Unauthorized"
+                        "description":"make sure you click on the Authorize button and enter the bgw api key as \"Bearer [bgw_api_key]\"",
+                        "schema":{
+                        "$ref":"#/responses/Unauthorized"}
                     },
                     "200": {
                         "$ref":"#/responses/Key"
