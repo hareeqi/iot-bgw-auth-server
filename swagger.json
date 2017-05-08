@@ -186,6 +186,7 @@
     "paths": {
         "/user/":{
           "get": {
+            "security":{"api_key": []}
             "summary": "Retrieves users list",
             "responses": {
                 "200": {
