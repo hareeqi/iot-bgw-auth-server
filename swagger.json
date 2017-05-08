@@ -160,6 +160,14 @@
                 }
             }
         },
+        "UnauthorizedRes":{
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
         "ErrorResponse": {
             "type": "object",
             "properties": {
@@ -181,6 +189,12 @@
             "schema": {
                 "$ref": "#/definitions/KeyRes"
             }
+        },
+        "Unauthorized": {
+            "description": "Unauthorized 401, make sure you click on the Authorize button and enter the bgw api key as \"Bearer [bgw_api_key]\" ",
+            "schema": {
+                "$ref": "#/definitions/UnauthorizedRes"
+            }
         }
     },
     "paths": {
@@ -195,6 +209,9 @@
                         "$ref": "#/definitions/GetAllUsers"
                     }
                 },
+                "401": {
+                    "$ref":"#/responses/Unauthorized"
+                },
                 "500": {
                     "$ref": "#/responses/RespInternalServerError"
                 }
@@ -202,7 +219,8 @@
           },
           "post": {
               "summary": "Creates new user",
-                "parameters": [
+              "security": [{"api_key": []}],
+              "parameters": [
                     {
                         "name": "profile",
                         "description": "All feilds are optional",
@@ -213,7 +231,10 @@
                         }
                     }
                 ],
-                "responses": {
+              "responses": {
+                    "401": {
+                        "$ref":"#/responses/Unauthorized"
+                    },
                     "200": {
                         "$ref":"#/responses/Key"
                     },
@@ -226,6 +247,7 @@
         "/user/{id}": {
             "get": {
                 "summary": "Retrieves the full profile of a single user",
+                "security": [{"api_key": []}],
                 "parameters": [
                     {
                         "name": "id",
@@ -236,6 +258,9 @@
                     }
                 ],
                 "responses": {
+                    "401": {
+                        "$ref":"#/responses/Unauthorized"
+                    },
                     "200": {
                         "description": "Successful response",
                         "schema": {
@@ -249,6 +274,7 @@
             },
             "patch": {
                 "summary": "Updates the full profile of a single user",
+                "security": [{"api_key": []}],
                 "parameters": [
                     {
                         "name": "id",
@@ -268,6 +294,9 @@
                     }
                 ],
                 "responses": {
+                    "401": {
+                        "$ref":"#/responses/Unauthorized"
+                    },
                     "500": {
                         "$ref": "#/responses/RespInternalServerError"
                     }
@@ -275,6 +304,7 @@
             },
             "delete": {
                 "summary": "Deletes a user",
+                "security": [{"api_key": []}],
                 "parameters": [
                     {
                         "name": "id",
@@ -285,6 +315,9 @@
                     }
                 ],
                 "responses": {
+                    "401": {
+                        "$ref":"#/responses/Unauthorized"
+                    },
                     "500": {
                         "$ref": "#/responses/RespInternalServerError"
                     }
@@ -294,6 +327,7 @@
         "/user/{id}/renew_key": {
             "post": {
                 "summary": "Revoke the old key and create a new one",
+                "security": [{"api_key": []}],
                 "parameters": [
                     {
                         "name": "id",
@@ -304,6 +338,9 @@
                     }
                 ],
                 "responses": {
+                    "401": {
+                        "$ref":"#/responses/Unauthorized"
+                    },
                     "200": {
                         "$ref":"#/responses/Key"
                     },
