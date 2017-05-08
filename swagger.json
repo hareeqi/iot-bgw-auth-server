@@ -5,6 +5,13 @@
         "title": "IoT Border Gateway Auth Server",
         "description": "https://github.com/hareeqi/iot-bgw-auth-server"
     },
+    "securityDefinitions": {
+      "api_key": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+      }
+    },
     "basePath": "/",
     "produces": [
         "application/json"
