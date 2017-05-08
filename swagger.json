@@ -187,6 +187,7 @@
         "/user/":{
           "get": {
             "summary": "Retrieves users list",
+            "security": [{"api_key": []}],
             "responses": {
                 "200": {
                     "description": "Successful response",
