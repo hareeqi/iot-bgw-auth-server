@@ -12,6 +12,8 @@
       "in": "header"
       }
     },
+    "host": "locahost",
+    "schemes": ["https"],
     "basePath": "/",
     "produces": [
         "application/json"
