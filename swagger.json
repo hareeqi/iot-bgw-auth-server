@@ -20,7 +20,7 @@
     ],
     "definitions": {
           "GetAllUsers": {
-            "title": "User",
+            "title": "GetAllUsers",
             "type": "object",
             "properties": {
                 "user_id": {
@@ -29,14 +29,20 @@
                 "name": {
                     "type": "string"
                 },
+                "created": {
+                    "type": "integer"
+                },
+                "updated": {
+                    "type": "integer"
+                },
+                "issued": {
+                    "type": "integer"
+                },
                 "valid_from": {
                     "type": "integer"
                 },
                 "valid_to": {
                     "type": "integer"
-                },            
-                "suspended": {
-                  "type": "boolean"
                 },
                 "rules_policy_deny_match": {
                   "type": "boolean"
@@ -44,7 +50,7 @@
             }
         },
         "GetUser": {
-            "title": "User",
+            "title": "GetUser",
             "type": "object",
             "properties": {
                 "user_id": {
@@ -89,7 +95,7 @@
             }
         },
         "PatchUser": {
-            "title": "User",
+            "title": "PatchUser",
             "type": "object",
             "properties": {
                 "name": {
@@ -119,7 +125,7 @@
             }
         },
         "PostUser": {
-          "title": "User",
+          "title": "PostUser",
             "type": "object",
             "properties": {
                  "user_id": {
