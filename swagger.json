@@ -202,6 +202,15 @@
           "get": {
             "summary": "Retrieves users list",
             "security": [{"api_key": []}],
+            "parameters": [
+                  {
+                      "name": "Authorization",
+                      "description": "must be in the format\"Bearer [bgw_api_key]\"",
+                      "in": "header",
+                      "required": true,
+                      "type":"string"
+                  }
+              ],
             "responses": {
                 "200": {
                     "description": "Successful response",
