@@ -22,8 +22,8 @@ const getAll =  ()=>new Promise((resolve, reject) =>{
   let users = []
   db.createValueStream()
   .on('data', function (value) {
-    const {user_id,name,created,updated, issued, valid_from, valid_to, rules_policy_deny_match } = JSON.parse(value)
-    users.push({user_id,name,created,updated, issued, valid_from, valid_to, rules_policy_deny_match })
+    const {user_id,name,suspended,created,updated, issued, valid_from, valid_to, rules_policy_deny_match } = JSON.parse(value)
+    users.push({user_id,name,suspended,created,updated, issued, valid_from, valid_to, rules_policy_deny_match })
   })
   .on('error', function (err) {
     reject('DB_ERROR');
@@ -42,4 +42,10 @@ setTimeout(async()=>{
   AAA.log(CAT.PROCESS_START,`Admin key is available in the following path ${config.api_admin_key_file_path}`)
   const key = (await require('./model').create({user_id:'admin',rules:['#']})).key
   fs.writeFileSync(path.join(config.api_admin_key_file_path,'admin_api_key.txt'),key)
+  try {
+    await get('anonymous')
+  } catch (e) {
+    await require('./model').create({user_id:'anonymous',suspended:true})
+  }
+
 },500)

@@ -1,6 +1,8 @@
 const db =  require('./db')
 const config = require('./config')
 
+config.valid_to= ""+config.valid_to
+const default_period =  config.valid_to.split('*').reduce((t,c)=>(t*c),1000)
 class User {
 
   async create (user={}){
@@ -8,7 +10,7 @@ class User {
     try {
       already_exist =  await db.get(user.user_id)
     } catch (e) {}
-    
+
     if(already_exist && user.user_id != 'admin'){
       throw {message:'user id already exist'}
     }
@@ -17,7 +19,7 @@ class User {
     user.updated = user.created
     user.issued = user.created
     user.valid_from = user.valid_from || user.created
-    user.valid_to = user.valid_to || (user.created + config.valid_to.split('*').reduce((t,c)=>(t*c),1000))
+    user.valid_to = user.valid_to || (user.created + default_period)
     user.rules = user.rules || []
     const sign = await db.sign(user.user_id)
     user.password = sign.password_hash
@@ -39,6 +41,9 @@ class User {
 
   async get (user_id){
     let user =  await db.get(user_id)
+    if(user.user_id == "admin" || user.user_id == "anonymous"){
+      user.valid_to = Date.now() + default_period
+    }
     return user;
   }
 
