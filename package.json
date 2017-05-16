@@ -15,6 +15,7 @@
   "bugs": {
     "url": "https://github.com/hareeqi/iot-bgw-auth-server/issues"
   },
+  "eslintConfig":{"parserOptions": {"ecmaVersion": 2017}},
   "homepage": "https://github.com/hareeqi/iot-bgw-auth-server#readme",
   "dependencies": {
     "body-parser": "^1.17.1",
