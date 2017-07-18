@@ -13,7 +13,7 @@ app.use((req,res,next)=>{
     if(req.headers.authorization == config.aaa_client.secret){
       next()
     } else {
-      res.status(403).json({status:false, error:'Invalid border gateway admin key' })
+      res.status(403).json({status:false, error:'The BGW HTTP or MQTT Proxy could not Connect AAA Client Secret Mismatch ' })
     }
 })
 
