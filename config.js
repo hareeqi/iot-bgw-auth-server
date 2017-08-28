@@ -10,6 +10,7 @@ let config = {
     no_color:false,
     timestamp:false,
     disable_cat:[],
+    auth_provider: "internal",
     secret: process.env.TLS_KEY || "./config/key.pem"
   }
 }
