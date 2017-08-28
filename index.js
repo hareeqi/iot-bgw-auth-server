@@ -4,8 +4,8 @@ const cors = require('cors');
 const config = require('./config')
 const {AAA, CAT} = require('../iot-bgw-aaa-client')
 
-const auth_provider = process.env.AAA_CLIENT_AUTH_PROVIDER
-if(auth_provider!="internal"){
+const auth_provider = config.aaa_client.auth_provider
+if(auth_provider !="internal"){
   console.log("The BGW uses",auth_provider,"and does not use the internal auth provider, shutting down...  ");
   process.exit(0);
 }
